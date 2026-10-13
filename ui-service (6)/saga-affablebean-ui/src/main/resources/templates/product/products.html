@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html th:replace="~{layout/masterLayout :: layout(~{::main})}" 
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<main role="main">
+	<div class="container mt-5">
+		<div class="row mb-3">
+			<div class="offset-md-10 col-md-2">
+				<img th:src="@{/images/cart.gif}" alt="Cart" />
+				<span th:text="${cartSize}" class="ms-2"></span> 
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="d-flex flex-column mt-3">
+					<a th:href="@{'/api/ui/products?name=bakery'}" class="btn btn-outline-success px-5 rounded mb-3">Bakery</a>
+					<a th:href="@{'/api/ui/products?name=dairy'}" class="btn btn-outline-success px-5 rounded mb-3">Dairy</a>
+					<a th:href="@{'/api/ui/products?name=meats'}" class="btn btn-outline-success px-5 rounded mb-3">Meats</a>
+					<a th:href="@{'/api/ui/products?name=fruit_veg'}" class="btn btn-outline-success px-5 rounded mb-3">Fruit & Veg</a>
+				</div>
+			</div>
+			<div class="col-md-8">
+				<table class="table table-warning table-hover rounded">
+					<tbody>
+						<tr th:each="product : ${products}">
+							<td>
+								<img th:src="@{'/images/products/'+${product.name}+'.png'}" alt="Image" />
+							</td>
+							<td th:text="${product.name}"></td>
+							<td th:text="${'$' + product.price}"></td>
+							<td>
+								<a th:href="@{'/api/ui/products/add-to-cart?id='+${product.id}}"
+								 class="btn btn-outline-warning">Purchase</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</main>
+</body>
+</html>
